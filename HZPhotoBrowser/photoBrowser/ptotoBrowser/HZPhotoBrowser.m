@@ -106,7 +106,7 @@
     _photoBrowserStyle = HZPhotoBrowserStyleDefault;
 }
 
-- (void)setImageArray:(NSArray *)imageArray{
+- (void)setImageArray:(NSMutableArray *)imageArray{
     _imageArray = imageArray;
     _imageCount = imageArray.count;
     _sourceImagesContainerView = nil;
@@ -246,12 +246,61 @@
 //保存图像
 - (void)saveImage
 {
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"更多" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"保存",@"删除", nil];
+    [alertView show];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
     int index = _scrollView.contentOffset.x / _scrollView.bounds.size.width;
-    HZPhotoBrowserView *currentView = _scrollView.subviews[index];
-    if (currentView.hasLoadedImage) {
-        UIImageWriteToSavedPhotosAlbum(currentView.imageview.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
-    } else {
-        [self showTip:HZPhotoBrowserSaveImageFailText];
+    switch (buttonIndex) {
+        case 1:
+            {
+                HZPhotoBrowserView *currentView = _scrollView.subviews[index];
+                if (currentView.hasLoadedImage) {
+                    UIImageWriteToSavedPhotosAlbum(currentView.imageview.image, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
+                } else {
+                    [self showTip:HZPhotoBrowserSaveImageFailText];
+                }
+
+            }
+            break;
+            case 2:
+        {
+            if ([self.delegate respondsToSelector:@selector(browserDeleteImageAtIndexPath:)]) {
+                [self.delegate browserDeleteImageAtIndexPath:index];
+            }
+            
+            if (_scrollView.subviews.count == 1 && self.imageArray.count == 1)
+            {
+                [self hideAnimation];
+            }
+            else
+            {
+                [_scrollView.subviews[index] removeFromSuperview];
+                [self.imageArray removeObjectAtIndex:index];
+                
+                _scrollView.contentSize = CGSizeMake(self.imageArray.count * _scrollView.frame.size.width, _scrollView.frame.size.height);
+                _scrollView.contentOffset = CGPointMake((index-1 )* _scrollView.frame.size.width, 0);
+                
+                self.imageCount = self.imageArray.count;
+                self.currentImageIndex = index-1;
+                if (self.imageCount > 1) {
+                    int indexaaaaa = _scrollView.contentOffset.x / _scrollView.bounds.size.width;
+                    _indexLabel.text = [NSString stringWithFormat:@"%d/%ld",indexaaaaa,(long)self.imageCount];
+                }
+                else
+                {
+                    [_indexLabel removeFromSuperview];
+                }
+                
+                [self layoutSubviews];
+                
+            }
+        }
+            break;
+        default:
+            break;
     }
 }
 

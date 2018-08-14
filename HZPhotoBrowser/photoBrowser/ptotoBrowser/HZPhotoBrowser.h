@@ -13,6 +13,8 @@
 
 //配置小图和大图
 @protocol HZPhotoBrowserDelegate <NSObject>
+@optional
+-(void)browserDeleteImageAtIndexPath:(NSInteger)index;
 @required
 - (UIImage *)photoBrowser:(HZPhotoBrowser *)browser placeholderImageForIndex:(NSInteger)index;
 - (NSURL *)photoBrowser:(HZPhotoBrowser *)browser highQualityImageURLForIndex:(NSInteger)index;
@@ -25,7 +27,7 @@
 @property (nonatomic, assign) NSInteger imageCount;
 
 //第二种展示方式（退出时不能回到原来的位置，默认回到屏幕正中央）直接传url,图片url列表必传
-@property (nonatomic,strong) NSArray *imageArray;
+@property (nonatomic,strong) NSMutableArray *imageArray;
 
 //从第几张图片开始展示，默认 0（第一种或者第二种方式展示都必须传）
 @property (nonatomic, assign) int currentImageIndex;

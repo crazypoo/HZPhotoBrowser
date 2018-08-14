@@ -380,7 +380,7 @@
 				TargetAttributes = {
 					EE3A82B91B38E9D6001F0E67 = {
 						CreatedOnToolsVersion = 6.3;
-						DevelopmentTeam = CU5KU23LFX;
+						DevelopmentTeam = FA9SE57VK7;
 					};
 					EE3A82D21B38E9D7001F0E67 = {
 						CreatedOnToolsVersion = 6.3;
@@ -589,7 +589,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CU5KU23LFX;
+				DEVELOPMENT_TEAM = FA9SE57VK7;
 				INFOPLIST_FILE = photoBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -600,7 +600,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = CU5KU23LFX;
+				DEVELOPMENT_TEAM = FA9SE57VK7;
 				INFOPLIST_FILE = photoBrowser/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
